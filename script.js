@@ -1,32 +1,35 @@
-let body = document.body;
-let colorText = document.getElementById('colorText');
-let changeColorBtn = document.getElementById('changeColor');
-
-let generateRandomHexValue = () => {
-    let val = Math.round(Math.random() * 15);
-    val = (val > 9) ? String.fromCharCode('a'.charCodeAt(0) + val - 10) : val;
-    return val;
-};
-
-
+/**
+ * Generates random color in Hex format
+ * @function generateRandomColor
+ * @returns {String}  Properly formatted Hex color code
+ */
 let generateRandomColor = () => {
-    let color = '#'
-    for (const _ of Array(6)) {
-        color += generateRandomHexValue();
-    }
-    return color
+    let hexCode = Math.ceil(Math.random() * 16777215).toString(16);
+    return '#' + (hexCode.length == 6 ? '' : '0') + hexCode;
 }
 
+/**
+ * Changes bgcolor in body and text in the text container
+ * @function changeColor
+ * @returns {undefined} Nothing
+ */
 let changeColor = () => {
     let generatedColor = generateRandomColor()
     body.style.backgroundColor = generatedColor;
     colorText.textContent = generatedColor;
+
 }
 
-changeColorBtn.onclick = ()=>{
+// Targetting elements that will be used in changing the colors
+let body = document.body;
+let colorText = document.getElementById('colorText');
+let changeColorBtn = document.getElementById('changeColor');
+
+changeColorBtn.onclick = () => {
     changeColor()
 };
 
-
+// Initial Change/application of the color
+// app initialization
 changeColor()
 
